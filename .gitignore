@@ -1,0 +1,13 @@
+/nbproject/
+/vendor/
+/.phpintel/
+*.zip
+*.xml
+!/phpunit.xml
+!/build.xml
+/build/*
+# build
+!/build/phpmd.xml
+!/build/phpunit.xml
+!/build/phpdox.xml
+/composer.lock
