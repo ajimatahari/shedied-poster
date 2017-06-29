@@ -1,0 +1,53 @@
+kita,kalian,kami
+asal,yang berasal
+jenis,macam
+masalah,persoalan
+milik,punya
+rapat,pertemuan,meeting
+menambah,tidak mengurangi
+memutuskan,menetapkan
+dilakukan,dikerjakan
+kondisi,keadaan
+saat,ketika
+sudah,telah
+pendiri,pelopor
+dihalangi,ditutupi
+memperlihatkan,menunjukkan,memamerkan
+berkeliling,mengelilingi
+seluruh,semua,segala
+dapat,bisa,mampu
+informasi,keterangan
+kasus,perkara,masalah
+selalu,terus
+membantu,menolong
+langsung,segera
+tiba,datang
+penting,utama
+tampaknya,sepertinya
+sering,tidak jarang,kadang
+satu,sesuatu
+dua,beberapa
+akan,mulai
+siap,bersiap
+mencoba,coba
+yang,yg
+DPR,Dewan Perwakilan Rakyat
+DPD,Dewan Perwakilan Daerah
+lalu,dulu,dahulu
+minggu,pekan
+saya,aku
+yaitu,merupakan
+tak,tidak
+mengatakan,menyampaikan
+memakai,menggunakan
+tapi,tetapi
+jika,seandainya
+gampang,mudah
+yakin,percaya
+cuma,hanya
+kpu,Komisi Pemilihan Umum
+meski,meskipun
+meluncurkan,launching
+untuk,buat,bagi
+lain,yang lain
+terlihat,kelihatan

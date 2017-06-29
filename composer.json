@@ -1,0 +1,20 @@
+{
+    "name": "vendor/shedied-poster",
+    "description": "Buat nyolong konten web orang.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kelaskakap",
+            "email": "rj.fikri@kelaskakap.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SheDied\\": "src/"
+        }
+    },
+    "require": {
+        "electrolinux/phpquery": "^0.9.6"
+    }
+}
