@@ -70,6 +70,8 @@ abstract class AbstractParser implements InterfaceParser {
         //<h3>content
         $node->find('h2')->wrap('<h3/>');
 	$node->find('h2')->contentsUnwrap();
+        //remove Baca juga or s.o like that
+        $node->find('a:contains("Baca")')->remove();
     }
 
     protected function cleanUp() {

@@ -18,6 +18,7 @@ class Liputan6Parser extends AbstractParser {
         $node->find('div.baca-juga')->remove();
         $node->find('img')->attr('class', 'aligncenter size-full');
         $node->find('div.article-content-body__item-break')->remove();
+        $node->find('p:contains("Saksikan Video Pilihan")')->remove();
         $this->cleanContentObject($node);
 
         $this->content = $node->html();
