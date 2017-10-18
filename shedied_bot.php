@@ -47,8 +47,8 @@ function shedied_exec_bot($sources = [], $count = 1, $transient_name = '', $swee
 
 function bot_yogyakarta() {
     $sources = [
-            ['src' => 26, 'cat' => 1089], //kr jogja, 
-        ['src' => 51, 'cat' => 1089], //antara jogja
+            ['src' => 26, 'cat' => 44], //kr jogja, 
+        ['src' => 51, 'cat' => 44], //antara jogja
         ['src' => 30, 'cat' => 73], //kr jogja kampus
         ['src' => 31, 'cat' => 60], //kr jogja kriminal
     ];

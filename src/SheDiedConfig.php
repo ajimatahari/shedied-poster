@@ -45,7 +45,7 @@ class SheDieDConfig {
             self::$sources[45] = ['name' => 'Liputan6: Global', 'url' => 'http://global.liputan6.com/indeks/'];
             self::$sources[46] = ['name' => 'Liputan6: Regional', 'url' => 'http://regional.liputan6.com/indeks/'];
             self::$sources[47] = ['name' => 'Liputan6: Ramadhan', 'url' => 'http://ramadan.liputan6.com/indeks/'];
-            self::$sources[48] = ['name' => 'Liputan6: Ramalan Zodiak', 'url' => 'http://www.liputan6.com/tag/ramalan-zodiak?type=text'];
+            self::$sources[48] = ['name' => 'Liputan6: Ramalan Zodiak', 'url' => 'http://www.liputan6.com/tag/ramalan-zodiak'];
             //self::$sources[49] = ['name' => 'Liputan6: ', 'url' => ''];
             //self::$sources[50] = ['name' => 'Liputan6: ', 'url' => ''];
             #antaranews
