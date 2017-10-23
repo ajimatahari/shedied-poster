@@ -26,6 +26,7 @@ class Liputan6Parser extends AbstractParser {
 
     public function grab() {
         $this->getPostDetail();
+        $this->checkTitle();
         $this->_getFeaturedImage();
         $this->_getTags();
         $this->aggregateContent();
@@ -65,6 +66,13 @@ class Liputan6Parser extends AbstractParser {
     private function removeContentSuggestions() {
         $content = preg_replace('/<p>Selanjutnya\sbaca\sdi\ssini.*?<\/p>/s', '', $this->content);
         $this->content = $content;
+    }
+
+    protected function checkTitle() {
+        $ttl = strtolower($this->title);
+        if (preg_match('/video:/', $ttl)) {
+            $this->post_this = false;
+        }
     }
 
 }

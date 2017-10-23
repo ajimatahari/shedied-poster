@@ -29,6 +29,7 @@ abstract class AbstractParser implements InterfaceParser {
     protected $latitude;
     protected $longitude;
     protected $comment_status = 'open';
+    protected $post_this = true;
 
     public function __construct() {
         
@@ -69,7 +70,7 @@ abstract class AbstractParser implements InterfaceParser {
         //to
         //<h3>content
         $node->find('h2')->wrap('<h3/>');
-	$node->find('h2')->contentsUnwrap();
+        $node->find('h2')->contentsUnwrap();
         //remove Baca juga or s.o like that
         $node->find('a:contains("Baca")')->remove();
     }
@@ -397,6 +398,9 @@ abstract class AbstractParser implements InterfaceParser {
 
     protected function cleanAllSpaces($string = '') {
         return preg_replace('/\s+/S', '', $string);
+    }
+    public function postThis() {
+        return $this->post_this;
     }
 
 }

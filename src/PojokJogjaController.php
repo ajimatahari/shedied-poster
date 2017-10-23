@@ -111,7 +111,7 @@ class PojokJogjaController extends Controller {
         if (!$this->hijack && !$this->auto) {
             $this->fetchPostLinks();
         }
-        
+
         switch ($this->news_src) {
             case $this->news_src > 10 && $this->news_src < 25:
                 $this->buildPostsKompas();
@@ -286,7 +286,7 @@ class PojokJogjaController extends Controller {
                         ->setUrl($link)
                         ->grab();
 
-                if (strlen($parser->getContent()) > 0) {
+                if (strlen($parser->getContent()) > 0 && $parser->postThis()) {
                     CWriter::removeHtmlComments($parser);
                     if ($this->is_rewrite == "true") {
                         CWriter::rewrite($parser);
