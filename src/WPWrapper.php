@@ -126,4 +126,11 @@ class WPWrapper {
         return $map->save($post_id);
     }
 
+    public static function exe_custom_upload_dir($post_id) {
+        if (is_plugin_active('custom-upload-dir/custom_upload_dir.php')) {
+            $_REQUEST['post_id'] = $post_id;
+            add_filter('upload_dir', 'cud_custom_upload_dir');
+        }
+    }
+
 }

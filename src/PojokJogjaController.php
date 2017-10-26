@@ -302,7 +302,9 @@ class PojokJogjaController extends Controller {
                     }
 
                     $new_draft_id = $this->createPost($parser, $key);
+                    
                     if ($new_draft_id > 0) {
+                        WPWrapper::exe_custom_upload_dir($new_draft_id);
                         WPWrapper::generate_featured_image($parser, $new_draft_id);
 
                         if ($parser->getHost() == 'jobstreet.co.id') {
@@ -429,7 +431,7 @@ class PojokJogjaController extends Controller {
         if ($this->hijack) {
             $this->count = 1;
             $this->post_links[] = [
-                'title' => 'Asuxi123',
+                'title' => 'Coba Custom Sendiri',
                 'link' => 'http://nova.grid.id/Sedap/Kue/Camilan-Sore-Puding-Durian-Gula-Palem-Dan-Puding-Susu-Pandan'
             ];
         }
