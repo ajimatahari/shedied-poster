@@ -9,7 +9,7 @@ class NovaParser extends AbstractParser {
     public function getPostDetail() {
         if ($this->source_category == 66) {
             //http://nova.grid.id/Sedap/Makanan/Tasty-Pasta-Tuna-Jamur?page=all
-            $temp_url = $this->url.'?page=all';
+            $temp_url = $this->url . '?page=all';
             $this->setUrl($temp_url);
         }
         $doc = $this->curlGrabContent();
@@ -58,6 +58,12 @@ class NovaParser extends AbstractParser {
 
     protected function _getHost() {
         $this->host = 'tabloid nova';
+    }
+
+    protected function _getTags() {
+        if ($this->source_category == 66) {
+            $this->tags = 'Aneka Resep Masakan';
+        }
     }
 
     protected function _getFeaturedImage() {
