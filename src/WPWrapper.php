@@ -36,18 +36,12 @@ class WPWrapper {
     }
 
     public static function generate_featured_image(InterfaceParser $parser, $post_id) {
-        try {
-            if (!empty($parser->getFeaturedImage())) {
-                require_once(ABSPATH . 'wp-admin/includes/media.php');
-                require_once(ABSPATH . 'wp-admin/includes/file.php');
-                require_once(ABSPATH . 'wp-admin/includes/image.php');
-                $filename = media_sideload_image($parser->getFeaturedImage(), $post_id, null, 'src');
-                $attach_id = self::get_attachment_id_from_src($filename, $parser->getDefaultAttachID());
-                return set_post_thumbnail($post_id, $attach_id);
-            }
-        } catch (\Exception $ex) {
-            syslog(LOG_DEBUG, '[shedied poster] - gagal simpan featured image - ' . $ex->getMessage());
-        }
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        $filename = media_sideload_image($parser->getFeaturedImage(), $post_id, null, 'src');
+        $attach_id = self::get_attachment_id_from_src($filename, $parser->getDefaultAttachID());
+        return set_post_thumbnail($post_id, $attach_id);
     }
 
     private static function get_attachment_id_from_src($image_src, $default) {
