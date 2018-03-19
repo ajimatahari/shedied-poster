@@ -24,6 +24,7 @@ class JobstreetParser extends AbstractParser {
     protected $tunjangan;
     protected $bahasa_digunakan;
     protected $mengapa_bergabung;
+    private $feature_image_id = 17;
 
     protected function getPostDetail() {
         $doc = $this->curlGrabContent();
@@ -156,6 +157,10 @@ class JobstreetParser extends AbstractParser {
         if ($this->source_category == 97) {
             $this->tags = [135];
         }
+    }
+
+    public function getDefaultAttachID() {
+        return $this->feature_image_id;
     }
 
 }

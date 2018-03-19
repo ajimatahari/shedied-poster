@@ -91,4 +91,6 @@ interface InterfaceParser {
     public function toArray();
 
     public function toWordpressPost();
+
+    public function getDefaultAttachID();
 }

@@ -42,7 +42,7 @@ class WPWrapper {
                 require_once(ABSPATH . 'wp-admin/includes/file.php');
                 require_once(ABSPATH . 'wp-admin/includes/image.php');
                 $filename = media_sideload_image($parser->getFeaturedImage(), $post_id, null, 'src');
-                $attach_id = self::get_attachment_id_from_src($filename);
+                $attach_id = self::get_attachment_id_from_src($filename, $parser->getDefaultAttachID());
                 return set_post_thumbnail($post_id, $attach_id);
             }
         } catch (\Exception $ex) {
@@ -50,11 +50,16 @@ class WPWrapper {
         }
     }
 
-    private static function get_attachment_id_from_src($image_src) {
-        global $wpdb;
-        $query = "SELECT ID FROM {$wpdb->posts} WHERE guid='$image_src'";
-        $id = $wpdb->get_var($query);
-        return $id;
+    private static function get_attachment_id_from_src($image_src, $default) {
+        if (is_string($image_src)) {
+            global $wpdb;
+            $query = "SELECT ID FROM {$wpdb->posts} WHERE guid='$image_src'";
+            $id = $wpdb->get_var($query);
+            if ($id) {
+                return $id;
+            }
+        }
+        return $default;
     }
 
     public static function pojokjogja_set_source($post_id, $td_source = '', $td_source_url = '') {
