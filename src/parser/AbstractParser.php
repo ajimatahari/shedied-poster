@@ -30,6 +30,8 @@ abstract class AbstractParser implements InterfaceParser {
     protected $longitude;
     protected $comment_status = 'open';
 
+    const DEFAULT_ATTACH_ID = 186785; // jogja senja
+
     public function __construct() {
         
     }
@@ -69,7 +71,7 @@ abstract class AbstractParser implements InterfaceParser {
         //to
         //<h3>content
         $node->find('h2')->wrap('<h3/>');
-	$node->find('h2')->contentsUnwrap();
+        $node->find('h2')->contentsUnwrap();
     }
 
     protected function cleanUp() {
@@ -395,6 +397,10 @@ abstract class AbstractParser implements InterfaceParser {
 
     protected function cleanAllSpaces($string = '') {
         return preg_replace('/\s+/S', '', $string);
+    }
+
+    public function getDefaultAttachID() {
+        return self::DEFAULT_ATTACH_ID;
     }
 
 }
