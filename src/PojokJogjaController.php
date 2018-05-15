@@ -6,6 +6,7 @@ use SheDied\parser\Controller;
 use SheDied\parser\Collections;
 use SheDied\parser\CWriter;
 use SheDied\parser\InterfaceParser;
+use SheDied\parser\FreetutorialsParser;
 use SheDied\WPWrapper;
 use SheDied\SheDieDConfig;
 
@@ -111,7 +112,7 @@ class PojokJogjaController extends Controller {
         if (!$this->hijack && !$this->auto) {
             $this->fetchPostLinks();
         }
-        
+
         switch ($this->news_src) {
             case $this->news_src > 10 && $this->news_src < 25:
                 $this->buildPostsKompas();
@@ -137,7 +138,7 @@ class PojokJogjaController extends Controller {
             case $this->news_src > 95 && $this->news_src < 100:
                 $this->buildPostJobstreet();
                 break;
-            case $this->news_src > 100 && $this->news_src < 105:
+            case $this->news_src > 100 && $this->news_src < 102:
                 if ($this->news_src == 101) {
                     $this->map_pois_collect = true;
                     $this->buildPostVisitingJogja();
@@ -145,6 +146,9 @@ class PojokJogjaController extends Controller {
                 } else {
                     $this->buildPostVisitingJogja();
                 }
+                break;
+            case $this->news_src > 101 && $this->news_src < 116:
+                $this->buildPostFreetutorials();
                 break;
         }
     }
@@ -250,9 +254,17 @@ class PojokJogjaController extends Controller {
             }
         }
 
-        if ($this->news_src > 100 && $this->news_src < 105) {
-            #Jobstreet
+        if ($this->news_src > 100 && $this->news_src < 102) {
             foreach (pq('h2.prl-article-title a') as $a) {
+                $link = pq($a)->attr('href');
+                $title = pq($a)->elements[0]->nodeValue;
+                $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+            }
+        }
+
+        if ($this->news_src > 101 && $this->news_src < 116) {
+            #Freetutorials     
+            foreach (pq('h2.post-title a') as $a) {
                 $link = pq($a)->attr('href');
                 $title = pq($a)->elements[0]->nodeValue;
                 $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
@@ -299,6 +311,10 @@ class PojokJogjaController extends Controller {
                     }
                     if (strlen($this->additional['prefix']) > 0 && strlen($this->additional['suffix']) > 0) {
                         CWriter::addPrefixSuffix($parser, $this->additional);
+                    }
+
+                    if ($parser instanceof FreetutorialsParser) {
+                        CWriter::FreetutorialsParserTorrentLink($parser);
                     }
 
                     $new_draft_id = $this->createPost($parser, $key);
@@ -429,8 +445,8 @@ class PojokJogjaController extends Controller {
         if ($this->hijack) {
             $this->count = 1;
             $this->post_links[] = [
-                'title' => 'Asuxi123',
-                'link' => 'http://nova.grid.id/Sedap/Kue/Camilan-Sore-Puding-Durian-Gula-Palem-Dan-Puding-Susu-Pandan'
+                'title' => 'ax3zabcdex',
+                'link' => 'https://www.freetutorials.us/instagram-marketing-2018-a-step-by-step-to-10000-followers/'
             ];
         }
         return $this;
@@ -460,6 +476,10 @@ class PojokJogjaController extends Controller {
         $this->loopPostLinks('SheDied\parser\VisitingJogjaParser');
     }
 
+    protected function buildPostFreetutorials() {
+        $this->loopPostLinks('SheDied\parser\FreetutorialsParser');
+    }
+
     public function getPostLinks() {
         return $this->post_links;
     }
@@ -486,8 +506,10 @@ class PojokJogjaController extends Controller {
                 return 'SheDied\parser\DetikParser';
             case $id > 95 && $id < 100:
                 return 'SheDied\parser\JobstreetParser';
-            case $id > 100 && $id < 105:
+            case $id > 100 && $id < 102:
                 return 'SheDied\parser\VisitingJogjaParser';
+            case $id > 101 && $id < 116:
+                return 'SheDied\parser\FreetutorialsParser';
             default:
                 return '';
         }

@@ -28,7 +28,7 @@ function shedied_exec_bot($sources = [], $count = 1, $transient_name = '', $swee
 
             if (!empty($to_run)) {
                 $controller->setBulkPostType('post')
-                        ->setAuthor(7) //redaksi
+                        ->setAuthor(SheDieDConfig::AUTHOR_ID) //redaksi
                         ->setBulkPostStatus('publish')
                         ->setInterval(['value' => 2, 'type' => 'minutes'])
                         ->setCount($count)

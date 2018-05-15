@@ -125,4 +125,9 @@ class WPWrapper {
         return $map->save($post_id);
     }
 
+    public static function upload_remote_file($filename = '', $remote_file = '') {
+        $get = wp_remote_get($remote_file);
+        return wp_upload_bits($filename, null, wp_remote_retrieve_body($get));
+    }
+
 }

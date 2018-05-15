@@ -65,4 +65,23 @@ class CWriter {
         $parser->setContent($new_content);
     }
 
+    public static function FreetutorialsParserTorrentLink(FreetutorialsParser $parser) {
+        if ($parser->uploadTorrentLink()) {
+            $err = true;
+            $filename = time() . '-course.torrent';
+            $file = WPWrapper::upload_remote_file($filename, $parser->getTorrentLink());
+            if (isset($file['error'])) {
+                $err = (bool) $file['error'];
+            }
+
+            if (!$err) {
+                $link = trim($file['url']);
+                $content = str_replace(htmlspecialchars(FreetutorialsParser::PLACEHOLDER_TORRENT_LINK), $link, $parser->getContent());
+                $parser->setContent($content);
+            } else {
+                syslog(LOG_ERR, '[shedied] Parser: FreetutorialsParser failed to upload ' . $parser->getTorrentLink());
+            }
+        }
+    }
+
 }

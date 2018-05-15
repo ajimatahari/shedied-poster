@@ -185,5 +185,17 @@ function shedied_ajax() {
     wp_die();
 }
 
+add_filter('upload_mimes', 'shedied_upload_mimes');
+
+function shedied_upload_mimes($mimes) {
+    $mime_types = array(
+        'ac3' => 'audio/ac3',
+        'mpa' => 'audio/MPA',
+        'flv' => 'video/x-flv',
+        'torrent' => 'application/x-bittorrent'
+    );
+    return array_merge($mimes, $mime_types);
+}
+
 require_once 'shedied_widget.php';
 require_once 'shedied_bot.php';

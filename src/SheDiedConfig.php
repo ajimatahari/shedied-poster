@@ -5,6 +5,7 @@ namespace SheDied;
 class SheDieDConfig {
 
     const BEAUTIFUL_YOGYAKARTA_MAPPRESS_ID = 5;
+    const AUTHOR_ID = 7;
 
     static $sources = [];
 
@@ -95,16 +96,31 @@ class SheDieDConfig {
             self::$sources[92] = ['name' => 'Detik: Sepak Bola', 'url' => 'http://sport.detik.com/sepakbola/indeks?btindeks'];
             self::$sources[93] = ['name' => 'Detik: detikFood', 'url' => 'http://food.detik.com/indeks?dtindeks'];
             self::$sources[94] = ['name' => 'Detik: detikHealth', 'url' => 'http://health.detik.com/indeks?ltindeks'];
+
             #jobstreet
             self::$sources[96] = ['name' => 'Jobstreet: Yogyakarta', 'url' => 'http://www.jobstreet.co.id/id/job-search/job-vacancy.php?key=&location=32700&specialization=&area=&salary=&ojs=3&src=12'];
             self::$sources[97] = ['name' => 'Jobstreet: Jawa Tengah', 'url' => 'http://www.jobstreet.co.id/id/job-search/job-vacancy.php?key=&location=30800&specialization=&area=&salary=&ojs=3&src=12'];
             self::$sources[98] = ['name' => 'Jobstreet: ', 'url' => ''];
             self::$sources[99] = ['name' => 'Jobstreet: ', 'url' => ''];
+
+            #visiting jogja
             self::$sources[101] = ['name' => 'Visiting Jogja: Wisata', 'url' => 'http://visitingjogja.com/web/index.php/detail/wisata.html'];
-            self::$sources[102] = ['name' => 'Jobstreet: ', 'url' => ''];
-            self::$sources[103] = ['name' => 'Jobstreet: ', 'url' => ''];
-            self::$sources[104] = ['name' => 'Jobstreet: ', 'url' => ''];
-            self::$sources[105] = ['name' => 'Jobstreet: ', 'url' => ''];
+
+            #freetutorialsdotus
+            self::$sources[102] = ['name' => 'Freetutorials: Academics', 'url' => 'https://www.freetutorials.us/academics-1/'];
+            self::$sources[103] = ['name' => 'Freetutorials: Business', 'url' => 'https://www.freetutorials.us/business-1/'];
+            self::$sources[104] = ['name' => 'Freetutorials: Design', 'url' => 'https://www.freetutorials.us/design-1/'];
+            self::$sources[105] = ['name' => 'Freetutorials: Development', 'url' => 'https://www.freetutorials.us/development-14-1/'];
+            self::$sources[106] = ['name' => 'Freetutorials: Health & Fitness', 'url' => 'https://www.freetutorials.us/health-fitness-1-2/'];
+            self::$sources[107] = ['name' => 'Freetutorials: IT & Software', 'url' => 'https://www.freetutorials.us/it-software-1/'];
+            self::$sources[108] = ['name' => 'Freetutorials: Language', 'url' => 'https://www.freetutorials.us/language-1/'];
+            self::$sources[109] = ['name' => 'Freetutorials: Lifestyle', 'url' => 'https://www.freetutorials.us/lifestyle/'];
+            self::$sources[110] = ['name' => 'Freetutorials: Machine Learning', 'url' => 'https://www.freetutorials.us/machine-learning/'];
+            self::$sources[111] = ['name' => 'Freetutorials: Marketing', 'url' => 'https://www.freetutorials.us/marketing-1/'];
+            self::$sources[112] = ['name' => 'Freetutorials: Music', 'url' => 'https://www.freetutorials.us/music-1/'];
+            self::$sources[113] = ['name' => 'Freetutorials: Office Productivity', 'url' => 'https://www.freetutorials.us/office-productivity-1-2/'];
+            self::$sources[114] = ['name' => 'Freetutorials: Personal Development', 'url' => 'https://www.freetutorials.us/personal-development-1/'];
+            self::$sources[115] = ['name' => 'Freetutorials: Photography', 'url' => 'https://www.freetutorials.us/photography-1-2/'];
         }
     }
 
