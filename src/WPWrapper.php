@@ -63,17 +63,9 @@ class WPWrapper {
     }
 
     public static function add_to_yoast_seo($post_id, $meta_title = '', $meta_description = '', $meta_keywords = '') {
-        $ret = false;
-        //if (is_plugin_active('wordpress-seo/wp-seo.php')) {
-            $updated_title = update_post_meta($post_id, '_yoast_wpseo_title', $meta_title);
-            $updated_desc = update_post_meta($post_id, '_yoast_wpseo_metadesc', $meta_description);
-            $updated_kw = update_post_meta($post_id, '_yoast_wpseo_metakeywords', $meta_keywords);
-
-            if ($updated_title && $updated_desc && $updated_kw) {
-                $ret = true;
-            }
-        //}
-        return $ret;
+        update_post_meta($post_id, '_yoast_wpseo_title', $meta_title);
+        update_post_meta($post_id, '_yoast_wpseo_metadesc', $meta_description);
+        update_post_meta($post_id, '_yoast_wpseo_metakeywords', $meta_keywords);
     }
 
     public static function pojokjogja_set_source_for_jobstreet($post_id, $td_source = '', $td_source_url = '', $company = '') {
