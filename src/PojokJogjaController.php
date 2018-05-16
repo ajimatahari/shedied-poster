@@ -113,43 +113,45 @@ class PojokJogjaController extends Controller {
             $this->fetchPostLinks();
         }
 
-        switch ($this->news_src) {
-            case $this->news_src > 10 && $this->news_src < 25:
-                $this->buildPostsKompas();
-                break;
-            case $this->news_src > 25 && $this->news_src < 35:
-                $this->buildPostsKrJogja();
-                break;
-            case $this->news_src > 35 && $this->news_src < 50:
-                $this->buildPostsLiputan6();
-                break;
-            case $this->news_src > 50 && $this->news_src < 65:
-                $this->buildPostsAntaraNews();
-                break;
-            case $this->news_src > 65 && $this->news_src < 75:
-                $this->buildPostNova();
-                break;
-            case $this->news_src > 75 && $this->news_src < 80:
-                $this->buildPostGameStation();
-                break;
-            case $this->news_src > 80 && $this->news_src < 95:
-                $this->buildPostDetik();
-                break;
-            case $this->news_src > 95 && $this->news_src < 100:
-                $this->buildPostJobstreet();
-                break;
-            case $this->news_src > 100 && $this->news_src < 102:
-                if ($this->news_src == 101) {
-                    $this->map_pois_collect = true;
-                    $this->buildPostVisitingJogja();
-                    $this->update_page_beautiful_yogyakarta();
-                } else {
-                    $this->buildPostVisitingJogja();
-                }
-                break;
-            case $this->news_src > 101 && $this->news_src < 116:
-                $this->buildPostFreetutorials();
-                break;
+        if (!empty($this->post_links)) {
+            switch ($this->news_src) {
+                case $this->news_src > 10 && $this->news_src < 25:
+                    $this->buildPostsKompas();
+                    break;
+                case $this->news_src > 25 && $this->news_src < 35:
+                    $this->buildPostsKrJogja();
+                    break;
+                case $this->news_src > 35 && $this->news_src < 50:
+                    $this->buildPostsLiputan6();
+                    break;
+                case $this->news_src > 50 && $this->news_src < 65:
+                    $this->buildPostsAntaraNews();
+                    break;
+                case $this->news_src > 65 && $this->news_src < 75:
+                    $this->buildPostNova();
+                    break;
+                case $this->news_src > 75 && $this->news_src < 80:
+                    $this->buildPostGameStation();
+                    break;
+                case $this->news_src > 80 && $this->news_src < 95:
+                    $this->buildPostDetik();
+                    break;
+                case $this->news_src > 95 && $this->news_src < 100:
+                    $this->buildPostJobstreet();
+                    break;
+                case $this->news_src > 100 && $this->news_src < 102:
+                    if ($this->news_src == 101) {
+                        $this->map_pois_collect = true;
+                        $this->buildPostVisitingJogja();
+                        $this->update_page_beautiful_yogyakarta();
+                    } else {
+                        $this->buildPostVisitingJogja();
+                    }
+                    break;
+                case $this->news_src > 101 && $this->news_src < 116:
+                    $this->buildPostFreetutorials();
+                    break;
+            }
         }
     }
 
