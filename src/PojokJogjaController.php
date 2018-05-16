@@ -159,116 +159,121 @@ class PojokJogjaController extends Controller {
             $doc = mb_convert_encoding($doc, "HTML-ENTITIES", "UTF-8");
         }
 
-        \phpQuery::newDocument($doc);
+        if (strlen($doc) > 0) {
+            \phpQuery::newDocument($doc);
 
-        if ($this->news_src > 10 && $this->news_src < 25) {
-            #kompas
-            foreach (pq('div.tleft h3 a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-            }
-        }
-
-        if ($this->news_src > 25 && $this->news_src < 35) {
-            #kr jogja
-            foreach (pq('div.news-post.article-post h2 a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-            }
-        }
-
-        if ($this->news_src > 35 && $this->news_src < 50) {
-            if ($this->news_src == 36 || $this->news_src == 48) {
-                #liputan 6 pilkada dki
-                #tag ramalan zodiak
-                foreach (pq('header.articles--iridescent-list--text-item__header h4 a') as $a) {
-                    $link = pq($a)->attr('href');
-                    $title = pq($a)->elements[0]->nodeValue;
-                    $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-                }
-            } else {
-                #liputan 6
-                foreach (pq('header.articles--rows--item__header h4 a') as $a) {
+            if ($this->news_src > 10 && $this->news_src < 25) {
+                #kompas
+                foreach (pq('div.tleft h3 a') as $a) {
                     $link = pq($a)->attr('href');
                     $title = pq($a)->elements[0]->nodeValue;
                     $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
                 }
             }
-        }
 
-        if ($this->news_src > 50 && $this->news_src < 65) {
-            #Antara News
-            foreach (pq('div.bxpd h3 a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-            }
-        }
-
-        if ($this->news_src > 65 && $this->news_src < 75) {
-            #Nova
-            if ($this->news_src == 66) {
-                #sedap
-                foreach (pq('div.latest_tx p a') as $a) {
+            if ($this->news_src > 25 && $this->news_src < 35) {
+                #kr jogja
+                foreach (pq('div.news-post.article-post h2 a') as $a) {
                     $link = pq($a)->attr('href');
                     $title = pq($a)->elements[0]->nodeValue;
                     $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
                 }
             }
-            if ($this->news_src == 67) {
-                #horoskop
-                $base_date = new \DateTime(WPWrapper::current_time(), new \DateTimeZone(WPWrapper::get_option('timezone_string')));
-                $awal = $base_date->format('d M Y');
-                $base_date->modify('+7 days');
-                $akhir = $base_date->format('d M Y');
-                $expire = ' ( ' . $awal . ' - ' . $akhir . ' )';
-                foreach (pq('div.latest-horoskop a') as $a) {
+
+            if ($this->news_src > 35 && $this->news_src < 50) {
+                if ($this->news_src == 36 || $this->news_src == 48) {
+                    #liputan 6 pilkada dki
+                    #tag ramalan zodiak
+                    foreach (pq('header.articles--iridescent-list--text-item__header h4 a') as $a) {
+                        $link = pq($a)->attr('href');
+                        $title = pq($a)->elements[0]->nodeValue;
+                        $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+                    }
+                } else {
+                    #liputan 6
+                    foreach (pq('header.articles--rows--item__header h4 a') as $a) {
+                        $link = pq($a)->attr('href');
+                        $title = pq($a)->elements[0]->nodeValue;
+                        $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+                    }
+                }
+            }
+
+            if ($this->news_src > 50 && $this->news_src < 65) {
+                #Antara News
+                foreach (pq('div.bxpd h3 a') as $a) {
                     $link = pq($a)->attr('href');
-                    $title = pq($a)->find('div.box-horoskop h1')->elements[0]->nodeValue . $expire;
+                    $title = pq($a)->elements[0]->nodeValue;
                     $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
                 }
             }
-        }
 
-        if ($this->news_src > 75 && $this->news_src < 80) {
-            #Gamestation
-            foreach (pq('div.article-image h3 a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+            if ($this->news_src > 65 && $this->news_src < 75) {
+                #Nova
+                if ($this->news_src == 66) {
+                    #sedap
+                    foreach (pq('div.latest_tx p a') as $a) {
+                        $link = pq($a)->attr('href');
+                        $title = pq($a)->elements[0]->nodeValue;
+                        $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+                    }
+                }
+                if ($this->news_src == 67) {
+                    #horoskop
+                    $base_date = new \DateTime(WPWrapper::current_time(), new \DateTimeZone(WPWrapper::get_option('timezone_string')));
+                    $awal = $base_date->format('d M Y');
+                    $base_date->modify('+7 days');
+                    $akhir = $base_date->format('d M Y');
+                    $expire = ' ( ' . $awal . ' - ' . $akhir . ' )';
+                    foreach (pq('div.latest-horoskop a') as $a) {
+                        $link = pq($a)->attr('href');
+                        $title = pq($a)->find('div.box-horoskop h1')->elements[0]->nodeValue . $expire;
+                        $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+                    }
+                }
             }
-        }
 
-        if ($this->news_src > 80 && $this->news_src < 95) {
-            #Detik
-        }
-
-        if ($this->news_src > 95 && $this->news_src < 100) {
-            #Jobstreet
-            foreach (pq('div.position-title.header-text a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+            if ($this->news_src > 75 && $this->news_src < 80) {
+                #Gamestation
+                foreach (pq('div.article-image h3 a') as $a) {
+                    $link = pq($a)->attr('href');
+                    $title = pq($a)->elements[0]->nodeValue;
+                    $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+                }
             }
-        }
 
-        if ($this->news_src > 100 && $this->news_src < 102) {
-            foreach (pq('h2.prl-article-title a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+            if ($this->news_src > 80 && $this->news_src < 95) {
+                #Detik
             }
-        }
 
-        if ($this->news_src > 101 && $this->news_src < 116) {
-            #Freetutorials     
-            foreach (pq('h2.post-title a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+            if ($this->news_src > 95 && $this->news_src < 100) {
+                #Jobstreet
+                foreach (pq('div.position-title.header-text a') as $a) {
+                    $link = pq($a)->attr('href');
+                    $title = pq($a)->elements[0]->nodeValue;
+                    $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+                }
             }
+
+            if ($this->news_src > 100 && $this->news_src < 102) {
+                foreach (pq('h2.prl-article-title a') as $a) {
+                    $link = pq($a)->attr('href');
+                    $title = pq($a)->elements[0]->nodeValue;
+                    $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+                }
+            }
+
+            if ($this->news_src > 101 && $this->news_src < 116) {
+                #Freetutorials     
+                foreach (pq('h2.post-title a') as $a) {
+                    $link = pq($a)->attr('href');
+                    $title = pq($a)->elements[0]->nodeValue;
+                    $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
+                }
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 
