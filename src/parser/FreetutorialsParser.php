@@ -77,7 +77,7 @@ class FreetutorialsParser extends AbstractParser {
     }
 
     protected function generateSeoMetaDescription() {
-        $text = 'Download video course: ' . $this->title;
+        $text = 'Download video course: ' . $this->title . '.';
         $this->meta_description = $text;
     }
 
