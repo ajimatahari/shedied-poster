@@ -48,6 +48,7 @@ class FreetutorialsParser extends AbstractParser {
     }
 
     protected function downloadButton() {
+        $_button = '<i class="fas fa-download"></i> Download';
         if (empty($this->torrent_link)) {
             $link = '#';
         } else {
@@ -56,10 +57,11 @@ class FreetutorialsParser extends AbstractParser {
                 $this->upload_torrent_link = true;
             } else {
                 $link = $this->torrent_link;
+                $_button = '<i class="fas fa-magnet"></i> Download';
             }
         }
         $button = '<a href="' . $link . '" target="_blank" class="button button-primary" rel="nofollow">';
-        $button .= '<i class="fas fa-download"></i> Download';
+        $button .= $_button;
         $button .= '</a>';
 
         return $button;
