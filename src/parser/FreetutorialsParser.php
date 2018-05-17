@@ -55,9 +55,11 @@ class FreetutorialsParser extends AbstractParser {
             if (strpos($this->torrent_link, '.torrent') !== false) {
                 $link = self::PLACEHOLDER_TORRENT_LINK;
                 $this->upload_torrent_link = true;
-            } else {
+            } elseif (strpos($this->torrent_link, 'magnet:?') !== false) {
                 $link = $this->torrent_link;
                 $_button = '<i class="fas fa-magnet"></i> Download';
+            } else {
+                $link = $this->torrent_link;
             }
         }
         $button = '<a href="' . $link . '" target="_blank" class="button button-primary" rel="nofollow">';
