@@ -111,40 +111,10 @@ class PojokJogjaController extends Controller {
         if (!$this->hijack && !$this->auto) {
             $this->fetchPostLinks();
         }
-        
+
         switch ($this->news_src) {
-            case $this->news_src > 10 && $this->news_src < 25:
-                $this->buildPostsKompas();
-                break;
-            case $this->news_src > 25 && $this->news_src < 35:
-                $this->buildPostsKrJogja();
-                break;
-            case $this->news_src > 35 && $this->news_src < 50:
-                $this->buildPostsLiputan6();
-                break;
-            case $this->news_src > 50 && $this->news_src < 65:
-                $this->buildPostsAntaraNews();
-                break;
-            case $this->news_src > 65 && $this->news_src < 75:
-                $this->buildPostNova();
-                break;
-            case $this->news_src > 75 && $this->news_src < 80:
-                $this->buildPostGameStation();
-                break;
-            case $this->news_src > 80 && $this->news_src < 95:
-                $this->buildPostDetik();
-                break;
             case $this->news_src > 95 && $this->news_src < 100:
                 $this->buildPostJobstreet();
-                break;
-            case $this->news_src > 100 && $this->news_src < 105:
-                if ($this->news_src == 101) {
-                    $this->map_pois_collect = true;
-                    $this->buildPostVisitingJogja();
-                    $this->update_page_beautiful_yogyakarta();
-                } else {
-                    $this->buildPostVisitingJogja();
-                }
                 break;
         }
     }
@@ -157,102 +127,9 @@ class PojokJogjaController extends Controller {
 
         \phpQuery::newDocument($doc);
 
-        if ($this->news_src > 10 && $this->news_src < 25) {
-            #kompas
-            foreach (pq('div.tleft h3 a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-            }
-        }
-
-        if ($this->news_src > 25 && $this->news_src < 35) {
-            #kr jogja
-            foreach (pq('div.news-post.article-post h2 a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-            }
-        }
-
-        if ($this->news_src > 35 && $this->news_src < 50) {
-            if ($this->news_src == 36 || $this->news_src == 48) {
-                #liputan 6 pilkada dki
-                #tag ramalan zodiak
-                foreach (pq('header.articles--iridescent-list--text-item__header h4 a') as $a) {
-                    $link = pq($a)->attr('href');
-                    $title = pq($a)->elements[0]->nodeValue;
-                    $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-                }
-            } else {
-                #liputan 6
-                foreach (pq('header.articles--rows--item__header h4 a') as $a) {
-                    $link = pq($a)->attr('href');
-                    $title = pq($a)->elements[0]->nodeValue;
-                    $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-                }
-            }
-        }
-
-        if ($this->news_src > 50 && $this->news_src < 65) {
-            #Antara News
-            foreach (pq('div.bxpd h3 a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-            }
-        }
-
-        if ($this->news_src > 65 && $this->news_src < 75) {
-            #Nova
-            if ($this->news_src == 66) {
-                #sedap
-                foreach (pq('div.latest_tx p a') as $a) {
-                    $link = pq($a)->attr('href');
-                    $title = pq($a)->elements[0]->nodeValue;
-                    $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-                }
-            }
-            if ($this->news_src == 67) {
-                #horoskop
-                $base_date = new \DateTime(WPWrapper::current_time(), new \DateTimeZone(WPWrapper::get_option('timezone_string')));
-                $awal = $base_date->format('d M Y');
-                $base_date->modify('+7 days');
-                $akhir = $base_date->format('d M Y');
-                $expire = ' ( ' . $awal . ' - ' . $akhir . ' )';
-                foreach (pq('div.latest-horoskop a') as $a) {
-                    $link = pq($a)->attr('href');
-                    $title = pq($a)->find('div.box-horoskop h1')->elements[0]->nodeValue . $expire;
-                    $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-                }
-            }
-        }
-
-        if ($this->news_src > 75 && $this->news_src < 80) {
-            #Gamestation
-            foreach (pq('div.article-image h3 a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => $title, "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-            }
-        }
-
-        if ($this->news_src > 80 && $this->news_src < 95) {
-            #Detik
-        }
-
         if ($this->news_src > 95 && $this->news_src < 100) {
             #Jobstreet
             foreach (pq('div.position-title.header-text a') as $a) {
-                $link = pq($a)->attr('href');
-                $title = pq($a)->elements[0]->nodeValue;
-                $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
-            }
-        }
-
-        if ($this->news_src > 100 && $this->news_src < 105) {
-            #Jobstreet
-            foreach (pq('h2.prl-article-title a') as $a) {
                 $link = pq($a)->attr('href');
                 $title = pq($a)->elements[0]->nodeValue;
                 $this->post_links[] = array("title" => trim($title), "link" => trim($link), 'src' => $this->news_src, 'cat' => $this->category);
@@ -300,7 +177,7 @@ class PojokJogjaController extends Controller {
                     if (strlen($this->additional['prefix']) > 0 && strlen($this->additional['suffix']) > 0) {
                         CWriter::addPrefixSuffix($parser, $this->additional);
                     }
-
+                    
                     $new_draft_id = $this->createPost($parser, $key);
                     if ($new_draft_id > 0) {
                         WPWrapper::generate_featured_image($parser, $new_draft_id);
@@ -313,11 +190,6 @@ class PojokJogjaController extends Controller {
                         }
 
                         WPWrapper::add_to_yoast_seo($new_draft_id, $parser->getMetaTitle(), $parser->getMetaDescription(), $parser->getMetaKeywords());
-
-                        $map = WPWrapper::pojokjogja_set_map_to_post($new_draft_id, $parser);
-                        if ($map && $this->map_pois_collect) {
-                            $this->map_pois = array_merge($this->map_pois, $map->pois);
-                        }
 
                         $this->echoSuccess($title, $new_draft_id);
                     }
@@ -333,24 +205,6 @@ class PojokJogjaController extends Controller {
 
         if ($key == 0) {
             $this->echoNoEntry();
-        }
-    }
-
-    /**
-     * update for page titled "Beautiful Yogyakarta"
-     */
-    protected function update_page_beautiful_yogyakarta() {
-        $page = WPWrapper::get_page_by_title('Beautiful Yogyakarta', 'OBJECT', 'page');
-        if ($page) {
-            if (!empty($this->map_pois)) {
-                $map = WPWrapper::mappress_get_map(SheDieDConfig::BEAUTIFUL_YOGYAKARTA_MAPPRESS_ID);
-                $current_pois = $map->pois;
-                $map->pois = array_merge($current_pois, $this->map_pois);
-                WPWrapper::mappress_update_map($page->ID, $map);
-                //clear & set to false
-                unset($this->map_pois);
-                $this->map_pois_collect = false;
-            }
         }
     }
 
@@ -387,10 +241,6 @@ class PojokJogjaController extends Controller {
         }
     }
 
-    protected function buildPostsKompas() {
-        $this->loopPostLinks('SheDied\parser\KompasParser');
-    }
-
     protected function createPost(InterfaceParser $parser, $key) {
         try {
             $base_date = new \DateTime(WPWrapper::current_time(), new \DateTimeZone(WPWrapper::get_option('timezone_string')));
@@ -416,14 +266,6 @@ class PojokJogjaController extends Controller {
         }
     }
 
-    protected function buildPostsKrJogja() {
-        $this->loopPostLinks('SheDied\parser\KrJogjaParser');
-    }
-
-    protected function buildPostsLiputan6() {
-        $this->loopPostLinks('SheDied\parser\Liputan6Parser');
-    }
-
     public function hijack($bool) {
         $this->hijack = (bool) $bool;
         if ($this->hijack) {
@@ -436,28 +278,8 @@ class PojokJogjaController extends Controller {
         return $this;
     }
 
-    protected function buildPostsAntaraNews() {
-        $this->loopPostLinks('SheDied\parser\AntaraNewsParser');
-    }
-
-    protected function buildPostNova() {
-        $this->loopPostLinks('SheDied\parser\NovaParser');
-    }
-
-    protected function buildPostGameStation() {
-        $this->loopPostLinks('SheDied\parser\GameStationParser');
-    }
-
-    protected function buildPostDetik() {
-        $this->loopPostLinks('SheDied\parser\DetikParser');
-    }
-
     protected function buildPostJobstreet() {
         $this->loopPostLinks('SheDied\parser\JobstreetParser');
-    }
-
-    protected function buildPostVisitingJogja() {
-        $this->loopPostLinks('SheDied\parser\VisitingJogjaParser');
     }
 
     public function getPostLinks() {
@@ -470,24 +292,8 @@ class PojokJogjaController extends Controller {
 
     protected function getParserNameBySource($id) {
         switch ($id) {
-            case $id > 10 && $id < 25:
-                return 'SheDied\parser\KompasParser';
-            case $id > 25 && $id < 35:
-                return 'SheDied\parser\KrJogjaParser';
-            case $id > 35 && $id < 50:
-                return 'SheDied\parser\Liputan6Parser';
-            case $id > 50 && $id < 65:
-                return 'SheDied\parser\AntaraNewsParser';
-            case $id > 65 && $id < 75:
-                return 'SheDied\parser\NovaParser';
-            case $id > 75 && $id < 80:
-                return 'SheDied\parser\GameStationParser';
-            case $id > 80 && $id < 95:
-                return 'SheDied\parser\DetikParser';
             case $id > 95 && $id < 100:
                 return 'SheDied\parser\JobstreetParser';
-            case $id > 100 && $id < 105:
-                return 'SheDied\parser\VisitingJogjaParser';
             default:
                 return '';
         }

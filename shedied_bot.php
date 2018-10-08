@@ -45,121 +45,6 @@ function shedied_exec_bot($sources = [], $count = 1, $transient_name = '', $swee
     }
 }
 
-function bot_yogyakarta() {
-    $sources = [
-            ['src' => 26, 'cat' => 44], //kr jogja, 
-        ['src' => 51, 'cat' => 44], //antara jogja
-        ['src' => 30, 'cat' => 73], //kr jogja kampus
-        ['src' => 31, 'cat' => 60], //kr jogja kriminal
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_yogyakarta');
-}
-
-add_action('bot_yogyakarta', 'bot_yogyakarta');
-
-function bot_nasional() {
-    $sources = [
-            ['src' => 44, 'cat' => 41], //liputan 6 nasional,
-        ['src' => 58, 'cat' => 41], //antara news
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_nasional');
-}
-
-add_action('bot_nasional', 'bot_nasional');
-
-function bot_politik() {
-    //liputan 6 pilkada dki, antara polkam
-    $sources = [['src' => 36, 'cat' => 64], ['src' => 57, 'cat' => 64]];
-    shedied_exec_bot($sources, 5, 'tsnt_politik');
-}
-
-add_action('bot_politik', 'bot_politik');
-
-function bot_lifetyle_kesehatan() {
-    $sources = [
-            ['src' => 37, 'cat' => 35], //kesehatan
-        ['src' => 39, 'cat' => 29], //lifestyle
-        ['src' => 66, 'cat' => 57] //hobi
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_lifetyle_kesehatan');
-}
-
-add_action('bot_lifetyle_kesehatan', 'bot_lifetyle_kesehatan');
-
-function bot_entertainment() {
-    $sources = [
-            ['src' => 43, 'cat' => 28], //liputan 6 showbiz
-        ['src' => 52, 'cat' => 40], //antara sinema
-        ['src' => 56, 'cat' => 39] //antara selebriti
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_entertainment');
-}
-
-add_action('bot_entertainment', 'bot_entertainment');
-
-function bot_tekno() {
-    $sources = [
-            ['src' => 38, 'cat' => 21], //liputan 6 tekno
-        ['src' => 53, 'cat' => 24], //antara internet
-        ['src' => 54, 'cat' => 23], //antara gadget
-        ['src' => 61, 'cat' => 25], //antara komputer
-        ['src' => 76, 'cat' => 94] //gamestation
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_tekno');
-}
-
-add_action('bot_tekno', 'bot_tekno');
-
-function bot_sport() {
-    $sources = [
-            ['src' => 42, 'cat' => 32], //liputan 6 bola
-        ['src' => 55, 'cat' => 27], //antara balap
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_sport');
-}
-
-add_action('bot_sport', 'bot_sport');
-
-function bot_bisnis() {
-    $sources = [
-            ['src' => 41, 'cat' => 36], //liputan 6 bisnis
-        ['src' => 17, 'cat' => 43], //kompas ekonomi
-        ['src' => 59, 'cat' => 43], //antara bursa
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_bisnis');
-}
-
-add_action('bot_bisnis', 'bot_bisnis');
-
-function bot_ragam() {
-    $sources = [
-            ['src' => 45, 'cat' => 42], //liputan 6 global
-        ['src' => 46, 'cat' => 41], //liputan 6 regional
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_ragam');
-}
-
-add_action('bot_ragam', 'bot_ragam');
-
-function bot_ragam_dua() {
-    $sources = [
-            ['src' => 60, 'cat' => 41], //antara seni budaya
-        ['src' => 40, 'cat' => 53] //liputan 6 otomotif
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_ragam_dua');
-}
-
-add_action('bot_ragam_dua', 'bot_ragam_dua');
-
-function bot_ragam_tiga() {
-    $sources = [
-            ['src' => 48, 'cat' => 65], //liputan 6 tag ramalan zodiak
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_ragam_tiga');
-}
-
-add_action('bot_ragam_tiga', 'bot_ragam_tiga');
-
 function bot_jogja_karir() {
     $sources = [
             ['src' => 96, 'cat' => 81], //jobstreet yogyakarta
@@ -171,18 +56,7 @@ function bot_jogja_karir() {
 add_action('bot_jogja_karir', 'bot_jogja_karir');
 
 function bot_sweeper() {
-    shedied_exec_bot([], 5, 'tsnt_nasional', true);
-    shedied_exec_bot([], 5, 'tsnt_politik', true);
-    shedied_exec_bot([], 5, 'tsnt_yogyakarta', true);
-    shedied_exec_bot([], 5, 'tsnt_lifetyle_kesehatan', true);
-    shedied_exec_bot([], 5, 'tsnt_entertainment', true);
-    shedied_exec_bot([], 5, 'tsnt_tekno', true);
-    shedied_exec_bot([], 5, 'tsnt_sport', true);
-    shedied_exec_bot([], 5, 'tsnt_bisnis', true);
-    shedied_exec_bot([], 5, 'tsnt_ragam', true);
-    shedied_exec_bot([], 5, 'tsnt_ragam_dua', true);
     shedied_exec_bot([], 5, 'tsnt_jogja_karir', true);
-    shedied_exec_bot([], 5, 'tsnt_ragam_tiga', true);
 }
 
 add_action('bot_sweeper', 'bot_sweeper');
