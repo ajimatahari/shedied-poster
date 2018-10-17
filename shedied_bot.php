@@ -10,11 +10,10 @@ function shedied_exec_bot($sources = [], $count = 1, $transient_name = '', $swee
         $controller = new PojokJogjaController(new Collections());
 
         if (empty($post_links) && !$sweeper && !empty($sources)) {
-            foreach ($sources as $source) {
-                $config = SheDieDConfig::getSource($source['src']);
-                $controller->setUrl($config['url']);
-                $controller->setNewsSrc($source['src']);
-                $controller->setCategory($source['cat']);
+            foreach ($sources as $sourceId => $source) {
+                $controller->setUrl($source['url']);
+                $controller->setNewsSrc($sourceId);
+                $controller->setCategory(5); //kategori lowongan-kerja
                 $controller->fetchPostLinks();
             }
             $post_links = $controller->getPostLinks();
@@ -28,7 +27,7 @@ function shedied_exec_bot($sources = [], $count = 1, $transient_name = '', $swee
 
             if (!empty($to_run)) {
                 $controller->setBulkPostType('post')
-                        ->setAuthor(7) //redaksi
+                        ->setAuthor(2) //bot
                         ->setBulkPostStatus('publish')
                         ->setInterval(['value' => 2, 'type' => 'minutes'])
                         ->setCount($count)
@@ -45,18 +44,39 @@ function shedied_exec_bot($sources = [], $count = 1, $transient_name = '', $swee
     }
 }
 
-function bot_jogja_karir() {
-    $sources = [
-            ['src' => 96, 'cat' => 81], //jobstreet yogyakarta
-        ['src' => 97, 'cat' => 81] //jobstreet jateng
-    ];
-    shedied_exec_bot($sources, 5, 'tsnt_jogja_karir');
+function bot_jobstreet_1() {
+    $sources = array_slice(SheDieDConfig::getSourcesList(), 0, 10, true);
+    shedied_exec_bot($sources, 20, 'tsnt_jobstreet_1');
 }
 
-add_action('bot_jogja_karir', 'bot_jogja_karir');
+add_action('bot_jobstreet_1', 'bot_jobstreet_1');
+
+function bot_jobstreet_2() {
+    $sources = array_slice(SheDieDConfig::getSourcesList(), 10, 10, true);
+    shedied_exec_bot($sources, 20, 'tsnt_jobstreet_2');
+}
+
+add_action('bot_jobstreet_2', 'bot_jobstreet_2');
+
+function bot_jobstreet_3() {
+    $sources = array_slice(SheDieDConfig::getSourcesList(), 20, 10, true);
+    shedied_exec_bot($sources, 20, 'tsnt_jobstreet_3');
+}
+
+add_action('bot_jobstreet_3', 'bot_jobstreet_3');
+
+function bot_jobstreet_4() {
+    $sources = array_slice(SheDieDConfig::getSourcesList(), 30, 10, true);
+    shedied_exec_bot($sources, 20, 'tsnt_jobstreet_4');
+}
+
+add_action('bot_jobstreet_4', 'bot_jobstreet_4');
 
 function bot_sweeper() {
-    shedied_exec_bot([], 5, 'tsnt_jogja_karir', true);
+    shedied_exec_bot([], 5, 'tsnt_jobstreet_1', true);
+    shedied_exec_bot([], 5, 'tsnt_jobstreet_2', true);
+    shedied_exec_bot([], 5, 'tsnt_jobstreet_3', true);
+    shedied_exec_bot([], 5, 'tsnt_jobstreet_4', true);
 }
 
 add_action('bot_sweeper', 'bot_sweeper');

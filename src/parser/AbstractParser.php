@@ -45,26 +45,38 @@ abstract class AbstractParser implements InterfaceParser {
     protected function cleanContentObject(\phpQueryObject $node) {
         //remove iframe
         $node->find('iframe')->remove();
+
         //remove noscript
         $node->find('noscript')->remove();
+
         //<div>content
         //to
         //<div><p>content
         $node->find('div')->wrap('<p/>');
+
         //<div><p>content
         //to
         //<p>content
         $node->find('div')->contentsUnwrap();
+
         //clean p from attributs mostly style, class
         $node->find('p')->removeAttr('*');
+
+        //<p><strong>content
+        //to
+        //<p>content
+        $node->find('p > strong')->contentsUnwrap();
+
         //<li><p>content
         //to
         //<li>content
         $node->find('li > p')->contentsUnwrap();
+
         //<li style="">content
         //to
         //<li>content
         $node->find('li')->removeAttr('style');
+
         //remove br
         //$node->find('br')->remove();
         //<h2>content

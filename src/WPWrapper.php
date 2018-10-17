@@ -77,13 +77,13 @@ class WPWrapper {
     }
 
     public static function pojokjogja_set_source_for_jobstreet($post_id, $td_source = '', $td_source_url = '', $company = '') {
-        $meta_value['td_source'] = $td_source;
-        $meta_value['td_source_url'] = $td_source_url;
-        $meta_value['td_subtitle'] = $company;
-        $meta_value['smart_list_template'] = 'td_smart_list_1';
-        $meta_value['td_smart_list_h'] = 'h3';
-        $meta_value['td_smart_list_order'] = 'asc_1';
-        update_post_meta($post_id, 'td_post_theme_settings', $meta_value);
+        update_post_meta($post_id, 'job_source', $td_source);
+        update_post_meta($post_id, 'job_source_url', $td_source_url);
+        update_post_meta($post_id, 'job_company', $company);
+    }
+
+    public static function pojokjogja_set_expdate_jobstreet($post_id, parser\JobstreetParser $parser) {
+        update_post_meta($post_id, 'job_expdate', $parser->getExpDate());
     }
 
     public static function pojokjogja_set_tags_for_jobstreet($post_id, $company = '', $tags = []) {

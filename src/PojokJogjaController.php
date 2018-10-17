@@ -113,7 +113,7 @@ class PojokJogjaController extends Controller {
         }
 
         switch ($this->news_src) {
-            case $this->news_src > 95 && $this->news_src < 100:
+            case $this->news_src > 1 && $this->news_src < 100:
                 $this->buildPostJobstreet();
                 break;
         }
@@ -127,7 +127,7 @@ class PojokJogjaController extends Controller {
 
         \phpQuery::newDocument($doc);
 
-        if ($this->news_src > 95 && $this->news_src < 100) {
+        if ($this->news_src > 1 && $this->news_src < 100) {
             #Jobstreet
             foreach (pq('div.position-title.header-text a') as $a) {
                 $link = pq($a)->attr('href');
@@ -177,13 +177,14 @@ class PojokJogjaController extends Controller {
                     if (strlen($this->additional['prefix']) > 0 && strlen($this->additional['suffix']) > 0) {
                         CWriter::addPrefixSuffix($parser, $this->additional);
                     }
-                    
+
                     $new_draft_id = $this->createPost($parser, $key);
                     if ($new_draft_id > 0) {
                         WPWrapper::generate_featured_image($parser, $new_draft_id);
 
                         if ($parser->getHost() == 'jobstreet.co.id') {
                             WPWrapper::pojokjogja_set_source_for_jobstreet($new_draft_id, $parser->getHost(), $parser->getUrl(), $parser->getNamaPerusahaan());
+                            WPWrapper::pojokjogja_set_expdate_jobstreet($new_draft_id, $parser);
                             WPWrapper::pojokjogja_set_tags_for_jobstreet($new_draft_id, $parser->getNamaPerusahaan(), $parser->getTags());
                         } else {
                             WPWrapper::pojokjogja_set_source($new_draft_id, $parser->getHost(), $parser->getUrl());
@@ -271,8 +272,8 @@ class PojokJogjaController extends Controller {
         if ($this->hijack) {
             $this->count = 1;
             $this->post_links[] = [
-                'title' => 'Asuxi123',
-                'link' => 'http://nova.grid.id/Sedap/Kue/Camilan-Sore-Puding-Durian-Gula-Palem-Dan-Puding-Susu-Pandan'
+                'title' => 'Asuxi123x55',
+                'link' => 'https://www.jobstreet.co.id/id/job/senior-accounting-2635740?fr=J&src=12&searchRequestToken=1b01ee66-f362-4df9-c10d-6c3d250749d8&sectionRank=20'
             ];
         }
         return $this;
@@ -292,7 +293,7 @@ class PojokJogjaController extends Controller {
 
     protected function getParserNameBySource($id) {
         switch ($id) {
-            case $id > 95 && $id < 100:
+            case $id > 1 && $id < 100:
                 return 'SheDied\parser\JobstreetParser';
             default:
                 return '';
