@@ -51,7 +51,11 @@ class JobstreetParser extends AbstractParser {
         $experience = $this->node->find('span[itemprop="experienceRequirements"]')->text();
         $lokasi_kerja = $this->node->find('p.add-detail-p')->text();
         if (!trim($lokasi_kerja)) {
-            $lokasi_kerja = '-';
+            if ($lokasi) {
+                $lokasi_kerja = trim($lokasi);
+            } else {
+                $lokasi_kerja = '-';
+            }
         }
 
         $job_description = $this->node->find('div[id="job_description"]');
@@ -84,7 +88,7 @@ class JobstreetParser extends AbstractParser {
         $tunjangan = $this->node->find('p[id="work_environment_tunjangan"]')->text();
         $bahasa_digunakan = $this->node->find('p[id="work_environment_bahasa_yang_digunakan"]')->text();
 
-        $informasi_perusahaan = $this->node->find('div[id="company_overview_all"]');        
+        $informasi_perusahaan = $this->node->find('div[id="company_overview_all"]');
         $this->cleanContentObject($informasi_perusahaan);
 
         $why_join = $this->node->find('div[id="why_join_us_all"]');
