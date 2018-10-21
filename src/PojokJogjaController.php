@@ -272,8 +272,8 @@ class PojokJogjaController extends Controller {
         if ($this->hijack) {
             $this->count = 1;
             $this->post_links[] = [
-                'title' => 'Asuxi123x55',
-                'link' => 'https://www.jobstreet.co.id/id/job/senior-accounting-2635740?fr=J&src=12&searchRequestToken=1b01ee66-f362-4df9-c10d-6c3d250749d8&sectionRank=20'
+                'title' => 'siskaaposeeoo',
+                'link' => 'https://www.jobstreet.co.id/id/job/it-support-papua-barat-sorong-2658017?fr=J&src=12&searchRequestToken=07c26a86-35d2-4e8c-9f24-323e9d94eac2&sectionRank=6'
             ];
         }
         return $this;

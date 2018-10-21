@@ -48,7 +48,7 @@ abstract class AbstractParser implements InterfaceParser {
 
         //remove noscript
         $node->find('noscript')->remove();
-
+        
         //<div>content
         //to
         //<div><p>content

@@ -84,7 +84,7 @@ class JobstreetParser extends AbstractParser {
         $tunjangan = $this->node->find('p[id="work_environment_tunjangan"]')->text();
         $bahasa_digunakan = $this->node->find('p[id="work_environment_bahasa_yang_digunakan"]')->text();
 
-        $informasi_perusahaan = $this->node->find('div[id="company_overview_all"]');
+        $informasi_perusahaan = $this->node->find('div[id="company_overview_all"]');        
         $this->cleanContentObject($informasi_perusahaan);
 
         $why_join = $this->node->find('div[id="why_join_us_all"]');
@@ -162,12 +162,12 @@ class JobstreetParser extends AbstractParser {
     }
 
     protected function generateSeoMetaDescription() {
-        $meta_description = 'Lowongan kerja Perusahaan ' . $this->perusahaan . ', Posisi ' . $this->posisi_job . ', Lokasi ' . $this->keterangan_lokasi;
+        $meta_description = 'Lowongan kerja Perusahaan ' . $this->perusahaan . ', Posisi ' . $this->posisi_job . ', Lokasi ' . $this->lokasi_kerja;
         $this->meta_description = $meta_description;
     }
 
     protected function generateSeoMetaKeywords() {
-        $meta_keywords = $this->perusahaan . ',' . $this->posisi_job . ',' . $this->keterangan_lokasi;
+        $meta_keywords = $this->perusahaan . ',' . $this->posisi_job . ',' . $this->lokasi_kerja;
         $this->meta_keywords = $meta_keywords;
     }
 
