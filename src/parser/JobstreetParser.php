@@ -175,6 +175,11 @@ class JobstreetParser extends AbstractParser {
         $this->meta_keywords = $meta_keywords;
     }
 
+    protected function generateSeoMetaTitle() {
+        $title = 'Lowongan kerja ' . $this->title;
+        $this->meta_title = $title;
+    }
+
     protected function _getFeaturedImage() {
         if (!$this->no_image) {
             $this->featured_image = $this->node->find('img[id="company_banner"]')->attr('data-original');

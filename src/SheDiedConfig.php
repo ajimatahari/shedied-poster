@@ -6,6 +6,8 @@ class SheDieDConfig {
 
     static $sources = [];
 
+    const IS_LOKERKREASI = true;
+
     private static function _sources() {
         if (empty(self::$sources)) {
             #jobstreet

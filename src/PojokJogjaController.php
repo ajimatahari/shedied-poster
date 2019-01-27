@@ -137,6 +137,18 @@ class PojokJogjaController extends Controller {
         }
     }
 
+    protected function generatePostTitle($string) {
+
+        $title = str_replace("&", "dan", $string);
+        $title = ucwords($title);
+
+        if (SheDieDConfig::IS_LOKERKREASI) {
+            $title = 'Lowongan Kerja ' . $title;
+        }
+
+        return $title;
+    }
+
     protected function loopPostLinks($instance_class_name = '') {
         $post_links = array_reverse($this->post_links);
         $key = 0;
@@ -151,8 +163,7 @@ class PojokJogjaController extends Controller {
                 $instance_class_name = $this->getParserNameBySource($this->news_src);
             }
 
-            $title = str_replace("&", "dan", trim($post_link['title']));
-            $title = ucwords($title);
+            $title = $this->generatePostTitle(trim($post_link['title']));
             $link = $post_link['link'];
 
             if (!WPWrapper::get_page_by_title($title)) {
